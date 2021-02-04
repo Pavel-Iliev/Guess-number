@@ -1,38 +1,257 @@
-.App {
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,500;1,300&display=swap');
+
+html {
+  font-size: 14px;
+}
+
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #777;
+  color: #333;
+  font-family: 'Raleway', sans-serif;
+  overflow: hidden;
+  overflow-y: auto;
+  min-height: 100vh;
+}
+
+ul,
+li {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+.guess-number { 
+  padding: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.guess-number p {
+  color: #000;
+  font-size: 18px;
+  margin: 2em 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.guess-number h1 {
+  font-size: 38px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.deckCards {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: row; 
+  margin-left: -15px;
+  margin-right: -15px;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.card {
+  border-radius: 10px;
+  background: rgb(0,0,0);
+  background: linear-gradient(45deg, rgba(0,0,0,1) 0%, rgba(51,51,51,1) 50%, rgba(0,0,0,1) 100%);
+  box-shadow: 0 0 10px rgba(0,0,0,1);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.deckCards li {
+  margin: 15px;
+  width: calc(100% - 30px);
+}
+
+.deckCards li {
+  margin: 15px;
+  width: calc(100% - 30px);
+  border-radius: 10px;
+  background: rgb(0,0,0);
+  background: linear-gradient(45deg, rgba(0,0,0,1) 0%, rgba(51,51,51,1) 50%, rgba(0,0,0,1) 100%);
+  transition: all .3s ease;
+  cursor: pointer;
+}
+
+.deckCards li:hover {
+  transform: scale(1.025);
+}
+
+.deckCards li.selected-card {
+  background: rgb(170,170,170);
+  background: linear-gradient(45deg, rgba(170,170,170,1) 0%, rgba(51,51,51,1) 50%, rgba(170,170,170,1) 100%);
+  transform: scale(1.025);
+}
+
+@media(min-width: 576px) {
+  .deckCards li {
+    margin: 15px;
+    width: calc(50% - 30px);
   }
-  to {
-    transform: rotate(360deg);
+}
+
+@media(min-width: 768px) {
+  .deckCards li {
+    margin: 15px;
+    width: calc(33.33333% - 30px);
   }
+} 
+
+@media(min-width: 992px) {
+  .deckCards li {
+    margin: 15px;
+    width: calc(25% - 30px);
+  }
+} 
+
+.deckCards li img {
+  width: 100%;
+  height: auto;
+  padding: 15px;
+}
+
+.cards-there-is {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 30px 0;
+}
+
+.cards-there-is li.cards-there-is--text {
+  width: 100%;
+  font-size: 24px;
+  text-align: center;
+  margin: 0px 0 15px;
+}
+
+.cards-there-is li:nth-child(2) {
+  margin-top: 0;
+}
+
+.cards-there-is li {
+  width: 220px;
+  margin: -80px 5px 0;
+  align-self: center;
+}
+
+.cards-there-is img {
+  width: 100%;
+  height: auto;
+  padding: 15px;
+}
+
+.wrap-alert-check {
+  position: relative;
+  top: -150px;
+}
+
+.wrap-alert-check__alert,
+.wrap-alert-check__check {
+  position: absolute;
+}
+
+.wrap-alert-check__alert {
+  left: 0;
+  top: 0;
+  width: 160px;
+  background-color: #fff;
+  padding: 30px 10px;
+  font-size: 14px;
+  text-align: center;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0,0,0,.5);
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: all .45s ease;
+}
+
+.wrap-alert-check__alert:before {
+  content: '!!!';
+  display: block;
+  font-size: 20px;
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.wrap-alert-check__check {
+  right: 0;
+  top: 0;
+}
+
+.wrap-alert-check__alert.over-100 {
+  opacity: 1;
+  transform: translateX(0%); 
+}
+
+.wrap-alert-check__check {
+  opacity: 0;
+  transform: translateX(100%);
+  transition: all .45s ease;
+}
+
+.wrap-alert-check__check.show {
+  opacity: 1;
+  transform: translateX(0); 
+}
+
+.wrap-alert-check__check button {
+    background-color: #fff;
+    color: #000;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px 25px;
+    border: 0;
+    box-shadow: 0 0 10px rgba(0,0,0,.5);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.your-number {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: all .45s ease;
+  background-color: rgba(255,255,255,.75);
+  padding: 50px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.your-number p {
+  text-transform: uppercase;
+  font-size: 14px;
+  padding: 15px;
+}
+
+.your-number span {
+  display: block;
+  font-size: 52px;
+  padding: 25px 0;
+}
+
+.your-number.show-number {
+  transform: translate(-50%, -50%) scale(1); 
+}
+
+.your-number button {
+  font-size: 12px;
+  box-shadow: none;
+  border: 0;
+  text-decoration: underline;
+  background-color: transparent;
 }
